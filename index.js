@@ -10,6 +10,7 @@ var app = express(),
       process.env.PERSONAL_WEBSITE_EMAIL_PASSWORD + '@smtp.gmail.com'
     );
 
+// THIS APPLICATION CONFIGURATION IS NECESSARY TO USE response.render inside route handlers/controllers
 app.set('view engine', 'pug');
 
 app.use(express.static(__dirname + '/public'));
@@ -17,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('dev'));
 
 app.get('/', (request, response) => {
+  // by default response.render looks up files inside /views folder
   response.render('index');
 });
 

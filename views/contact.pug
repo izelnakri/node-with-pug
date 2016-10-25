@@ -9,15 +9,15 @@ html
         .col-xs-6.col-xs-offset-3
           h1 You cand send me an email below:
 
-          form
+          form(action="/send-email" method="POST")
             .form-group
               label(for="full_name") Full Name
-              input(type="text" id="full_name" class="form-control" placeholder="John Appleseed")
+              input(name="fullName" type="text" id="full_name" class="form-control" placeholder="John Appleseed")
             .form-group
               label(for="email") Email address
-              input(type="text" id="email" class="form-control" placeholder="johnappleseed@apple.com")
+              input(name="emailAddress" type="text" id="email" class="form-control" placeholder="johnappleseed@apple.com")
             .form-group
               label(for="email_content") Email:
-              textarea(class="form-control" id="email_content" rows="5" placeholder="Your email goes here...")
+              textarea(name="content" class="form-control" id="email_content" rows="5" placeholder="Your email goes here...")
 
-            button(type="button" class="btn btn-success btn-lg btn-block") Submit
+            button(class="btn btn-success btn-lg btn-block") Submit

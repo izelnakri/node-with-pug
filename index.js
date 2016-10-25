@@ -4,13 +4,11 @@ const express = require('express'),
       bodyParser = require('body-parser'),
       pug = require('pug');
 
-console.log(process.env.PERSONAL_WEBSITE_EMAIL_ADDRESS);
-
 var app = express(),
-  transporter = nodemailer.createTransport(
-    'smtps://' + process.env.PERSONAL_WEBSITE_EMAIL_ADDRESS + ':' +
-    process.env.PERSONAL_WEBSITE_EMAIL_PASSWORD + '@smtp.gmail.com'
-  );
+    transporter = nodemailer.createTransport(
+      'smtps://' + process.env.PERSONAL_WEBSITE_EMAIL_ADDRESS + ':' +
+      process.env.PERSONAL_WEBSITE_EMAIL_PASSWORD + '@smtp.gmail.com'
+    );
 
 app.set('view engine', 'pug');
 
@@ -31,11 +29,11 @@ app.post('/send-email', (request, response) => {
   console.log(request.body);
 
   transporter.sendMail({
-    from: '"' + request.body.fullName + ' 👥" <' + request.body.emailAddress + '>',
-    to: 'nycdaamswdi@gmail.com',
+    from: request.body.emailAddress,
+    to: process.env.PERSONAL_WEBSITE_EMAIL_ADDRESS,
     subject: 'Email received from Personal Website',
-    text: request.body.content + '\n Reference Email of the sender is: ' +
-    request.body.emailAddress  + '\n Reference Full Name of the sender is: ' + request.body.fullName
+    text: request.body.content + '\n\nSender Email: ' +
+    request.body.emailAddress  + '\nSender Full Name: ' + request.body.fullName
   }, (error, info) => {
     if (error) {
       return console.log(error);

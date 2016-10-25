@@ -13,8 +13,13 @@ var app = express(),
 // THIS APPLICATION CONFIGURATION IS NECESSARY TO USE response.render inside route handlers/controllers
 app.set('view engine', 'pug');
 
-app.use(express.static(__dirname + '/public'));
+// tells express to use static file server middleware for all the files inside public:
+app.use(express.static('public'));
+
+// uses body parser url-enconding middleware which is the default encoding of <form> tag POST requests
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// tells express to use a logger middleware, type: 'dev'
 app.use(morgan('dev'));
 
 app.get('/', (request, response) => {
